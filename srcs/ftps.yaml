@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ftps-deploy
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: ftps
+  template:
+    metadata:
+      labels:
+        app: ftps
+    spec:
+      containers:
+      - name: ftps
+        imagePullPolicy: Never
+        image: ft_ftps
+        ports:
+        - containerPort: 21
+          name: ftp
+        - containerPort: 20
+          name: data
+        - containerPort: 30020
+          name: pasmin
+        - containerPort: 30021
+          name: pasmax
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ftps-service
+  annotations:
+    metallb.universe.tf/allow-shared-ip: "shared key"
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Cluster
+  selector:
+    app: ftps
+  ports:
+    - protocol: TCP
+      port: 21
+      targetPort: 21
+      nodePort: 21
+      name: ftp
+    - protocol: TCP
+      port: 20
+      targetPort: 20
+      nodePort: 20
+      name: data
+    - protocol: TCP
+      port: 30020
+      targetPort: 30020
+      nodePort: 30020
+      name: pasmin
+    - protocol: TCP
+      port: 30021
+      targetPort: 30021
+      nodePort: 30021
+      name: pasmax

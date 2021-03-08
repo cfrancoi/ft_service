@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-pma-deploy
+spec:
+  strategy:
+      type: Recreate
+  selector:
+    matchLabels:
+      app: my-pma
+  template:
+    metadata:
+      labels:
+        app: my-pma
+    spec:
+      containers:
+      - name: my-pma
+        imagePullPolicy: Never
+        image: my-pma
+        ports:
+        - containerPort: 443
+          name: https
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pma-service
+  annotations:
+    metallb.universe.tf/allow-shared-ip: "shared key"
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Cluster
+  selector:
+    app: my-pma
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 443
+      nodePort: 5000
+      name: https

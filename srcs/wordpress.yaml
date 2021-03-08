@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-wp
+spec:
+  strategy:
+      type: Recreate
+  selector:
+    matchLabels:
+      app: nginx-wp
+  template:
+    metadata:
+      labels:
+        app: nginx-wp
+    spec:
+      containers:
+      - name: nginx-wp
+        imagePullPolicy: Never
+        image: nginx-wp
+        ports:
+        - containerPort: 443
+          name: https
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-wp-service
+  annotations:
+    metallb.universe.tf/allow-shared-ip: "shared key"
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Cluster
+  selector:
+    app: nginx-wp
+  ports:
+    - protocol: TCP
+      port: 5050
+      targetPort: 443
+      nodePort: 5050
+      name: https

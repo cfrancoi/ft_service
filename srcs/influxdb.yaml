@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influx-deployment
+spec:
+  selector:
+    matchLabels:
+      app: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      volumes:
+      - name: pv-dock-cert
+        persistentVolumeClaim:
+          claimName: pvc-dock-cert
+      containers:
+      - name: my-influxdb
+        imagePullPolicy: Never
+        image: my-influxdb
+        ports:
+        - containerPort: 8086
+        volumeMounts:
+        - name: pv-dock-cert
+          mountPath: "./certs"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: influx-service
+spec:
+  type: ClusterIP
+  clusterIP: 10.96.83.103
+  selector:
+    app: influxdb
+  ports:
+    - protocol: TCP
+      port: 8086
+      targetPort: 8086
