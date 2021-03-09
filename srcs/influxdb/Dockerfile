@@ -1,5 +1,6 @@
 FROM alpine:3.11.7
 COPY config.conf .
+COPY influx.conf .
 RUN apk update ;\
 apk add openrc;\
 apk add wget;\

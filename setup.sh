@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export MINIKUBE_HOME=~/goinfre
-minikube start --driver=virtualbox --cpus 4 --disk-size 10000mb --extra-config=apiserver.service-node-port-range=1-35000
+minikube start --driver=virtualbox --cpus 4 --memory 4000mb --disk-size 10000mb --extra-config=apiserver.service-node-port-range=1-35000
 eval $(minikube docker-env)
 export MINIKUBE_IP=$(minikube ip)
 
@@ -11,8 +11,12 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manife
 # On first install only
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 
-sed  "s/IP/$MINIKUBE_IP/g" srcs/metallb-sample.yaml > metallb-conf.yaml
-kubectl create -f metallb-conf.yaml
+
+sed  "s|_PATH_|$PWD|g" srcs/influx-vol-spl > srcs/influx-vol.yaml
+sed  "s|_PATH_|$PWD|g" srcs/mysql-vol-spl > srcs/mysql-vol.yaml
+
+sed  "s/IP/$MINIKUBE_IP/g" srcs/metallb-sample.yaml > srcs/metallb-conf.yaml
+kubectl create -f srcs/metallb-conf.yaml
 
 #--ftps--
 sed "s/_IP_/$MINIKUBE_IP/g" srcs/ftps/vsftpd.sample > srcs/ftps/vsftpd.conf
