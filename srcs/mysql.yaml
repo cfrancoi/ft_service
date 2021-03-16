@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sql-deployment
+  name: mysql
 spec:
   strategy:
       type: Recreate
   selector:
     matchLabels:
-      app: sql-db
+      app: mysql
   template:
     metadata:
       labels:
-        app: sql-db
+        app: mysql
     spec:
       volumes:
       - name: pv-mysql
-        persistentVolumeClaim:
-         claimName: pvc-mysql
+        hostPath:
+            path: /data/mysql/
       containers:
-      - name: mysql-db
+      - name: mysql
         imagePullPolicy: Never
-        image: mysql-db
+        image: ft_mysql
         ports:
         - containerPort: 3306
         volumeMounts:
@@ -37,7 +37,7 @@ spec:
   type: ClusterIP
   clusterIP: 10.96.83.102
   selector:
-    app: sql-db
+    app: mysql
   ports:
     - protocol: TCP
       port: 3306

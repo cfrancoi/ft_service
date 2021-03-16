@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-pma-deploy
+  name: phpmyadmin
 spec:
   strategy:
       type: Recreate
   selector:
     matchLabels:
-      app: my-pma
+      app: phpmyadmin
   template:
     metadata:
       labels:
-        app: my-pma
+        app: phpmyadmin
     spec:
       containers:
-      - name: my-pma
+      - name: phpmyadmin
         imagePullPolicy: Never
-        image: my-pma
+        image: ft_phpmyadmin
         ports:
         - containerPort: 443
           name: https
@@ -24,14 +24,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: pma-service
+  name: phpmyadmin-service
   annotations:
     metallb.universe.tf/allow-shared-ip: "shared key"
 spec:
   type: LoadBalancer
   externalTrafficPolicy: Cluster
   selector:
-    app: my-pma
+    app: phpmyadmin
   ports:
     - protocol: TCP
       port: 5000

@@ -11,7 +11,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/Users/cfrancoi/42/ft_service/srcs/mysql-vol"
+    path: "/Users/cfrancoi/vol/mysql-vol"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

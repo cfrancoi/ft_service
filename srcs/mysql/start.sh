@@ -2,6 +2,7 @@ mv mariadb.cnf etc/my.cnf.d/mariadb-server.cnf
 #install db
 #/usr/bin/mysql_install_db --datadir="/var/lib/mysql" --user=mysql
 #start
+/usr/bin/mysql_install_db --datadir="/data" --user=mysql
 /usr/bin/mysqld_safe --user='root' --datadir='/data'
 
 #need

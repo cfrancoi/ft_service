@@ -14,6 +14,7 @@ COPY default.conf /etc/nginx/conf.d/
 
 COPY setup.sh .
 COPY config.inc.php .
+COPY phpmyadmin phpmyadmin
 COPY start.sh .
 RUN sh setup.sh
 EXPOSE 443

@@ -14,9 +14,9 @@ spec:
         app: grafana
     spec:
       containers:
-      - name: my-grafana
+      - name: grafana
         imagePullPolicy: Never
-        image: my-grafana
+        image: ft_grafana
         ports:
         - containerPort: 3000
           name: http

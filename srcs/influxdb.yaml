@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: influx-deployment
+  name: influxdb
 spec:
   selector:
     matchLabels:
@@ -16,9 +16,9 @@ spec:
         persistentVolumeClaim:
           claimName: pvc-dock-cert
       containers:
-      - name: my-influxdb
+      - name: influxdb
         imagePullPolicy: Never
-        image: my-influxdb
+        image: ft_influxdb
         ports:
         - containerPort: 8086
         volumeMounts:
