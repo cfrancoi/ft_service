@@ -13,8 +13,11 @@ spec:
     spec:
       volumes:
       - name: pv-dock-cert
-        persistentVolumeClaim:
-          claimName: pvc-dock-cert
+        hostPath:
+            path: /data/influxdb/
+      - name: config-maps
+        configMap:
+             name: cert-conf
       containers:
       - name: influxdb
         imagePullPolicy: Never
@@ -23,7 +26,10 @@ spec:
         - containerPort: 8086
         volumeMounts:
         - name: pv-dock-cert
+          mountPath: "./data"
+        - name: config-maps
           mountPath: "./certs"
+
 ---
 apiVersion: v1
 kind: Service
