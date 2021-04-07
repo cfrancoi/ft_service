@@ -8,7 +8,7 @@
 # this is only for the mysqld standalone daemon
 [mysqld]
 #skip-networking
-bind-address=0.0.0.0
+#bind-address=0.0.0.0
 innodb_use_native_aio=0
 
 # Galera-related settings
@@ -35,7 +35,6 @@ innodb_use_native_aio=0
 # If you use the same .cnf file for MySQL and MariaDB,
 # you can put MariaDB-only options here
 [mariadb]
-
 # This group is only read by MariaDB-10.3 servers.
 # If you use the same .cnf file for MariaDB of different versions,
 # use this group for options that older servers don't understand

@@ -32,7 +32,7 @@ $cfg['Servers'][$i]['auth_type'] = 'cookie';
 $cfg['Servers'][$i]['host'] = '10.96.83.102';
 $cfg['Servers'][$i]['compress'] = false;
 $cfg['Servers'][$i]['AllowNoPassword'] = yes;
-
+$cfg['PmaAbsoluteUri'] = './';
 /**
  * phpMyAdmin configuration storage settings.
  */

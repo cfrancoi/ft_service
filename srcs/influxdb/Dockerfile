@@ -6,7 +6,8 @@ apk add openrc;\
 apk add wget;\
 apk add influxdb; \
 apk add telegraf --repository='http://dl-cdn.alpinelinux.org/alpine/latest-stable/community/';\
-mkdir './data'
+mkdir './data' ;\
+mkdir './certs'
 
 
 COPY start.sh .

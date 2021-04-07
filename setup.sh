@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export MINIKUBE_HOME=~/goinfre
-minikube start --driver=virtualbox --cpus 4 --memory 4000mb --disk-size 10000mb --extra-config=apiserver.service-node-port-range=1-35000
+export MINIKUBE_HOME=/media/francois/Ub-data/minikube
+minikube start --driver=virtualbox --cpus 2 --memory 4000mb --disk-size 7500mb --extra-config=apiserver.service-node-port-range=1-35000 --docker-env DOCKER_TLS_VERIFY=0
 eval $(minikube docker-env)
 export MINIKUBE_IP=$(minikube ip)
 
@@ -19,7 +19,7 @@ sed "s/_IP_/$MINIKUBE_IP/g" srcs/ftps/vsftpd.sample > srcs/ftps/vsftpd.conf
 docker build srcs/ftps -t ft_ftps
 kubectl apply -f srcs/ftps.yaml
 #--Nginx--
-sed "s/IP/$MINIKUBE_IP/g" srcs/nginx/site-sample.conf > srcs/nginx/default.conf
+sed "s/_IP_/$MINIKUBE_IP/g" srcs/nginx/site-sample.conf > srcs/nginx/default.conf
 docker build srcs/nginx/ -t ft_nginx
 kubectl apply -f srcs/nginx.yaml
 
@@ -34,10 +34,11 @@ docker build srcs/phpMyAdmin/ -t ft_phpmyadmin
 kubectl apply -f srcs/phpMyAdmin.yaml
 
 #--InfluxDB--
+kubectl create configmap cert-conf --from-file=$DOCKER_CERT_PATH
 sed "s=_IP_=$DOCKER_HOST=g" srcs/influxdb/sample.conf > srcs/influxdb/config.conf
 docker build srcs/influxdb/ -t ft_influxdb
 cp -r $DOCKER_CERT_PATH /Users/cfrancoi/vol/influx-vol
-kubectl apply -f srcs/influx-vol.yaml # add volume
+#kubectl apply -f srcs/influx-vol.yaml # add volume
 kubectl apply -f srcs/influxdb.yaml
 
 #--Wordpress--
