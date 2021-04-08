@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export MINIKUBE_HOME=/media/francois/Ub-data/minikube
-minikube start --driver=virtualbox --cpus 2 --memory 4000mb --disk-size 7500mb --extra-config=apiserver.service-node-port-range=1-35000 --docker-env DOCKER_TLS_VERIFY=0
+export MINIKUBE_HOME=~/goinfre
+minikube start --driver=virtualbox --cpus 2 --memory 4000mb --disk-size 7500mb --extra-config=apiserver.service-node-port-range=1-35000
 eval $(minikube docker-env)
 export MINIKUBE_IP=$(minikube ip)
 

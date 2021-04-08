@@ -1,0 +1,8 @@
+apk add curl
+apk add php-phar
+apk add php-iconv
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+chmod +x wp-cli.phar
+mv wp-cli.phar /usr/local/bin/wp
+wp-cli config create --dbhost=10.96.83.102 --dbname=wp_db --dbuser=wp_user --dbpass='1234' --path=/usr/share/nginx/html/wordpress
+wp-cli core install --url=https://192.168.99.171:5050 --title=Magie --admin_user=root --admin_password=1234 --admin_email=lol@lareussite.com /usr/share/nginx/html/wordpress
