@@ -10,12 +10,12 @@ apk add wget; \
 mkdir -p /usr/share/nginx/html ;\
 mkdir -p /run/nginx ;
 
-COPY default.conf /etc/nginx/conf.d/
+COPY ./srcs/default.conf /etc/nginx/conf.d/
 
-COPY setup.sh .
-COPY config.inc.php .
-COPY phpmyadmin phpmyadmin
-COPY start.sh .
+COPY ./srcs/setup.sh .
+COPY ./srcs/config.inc.php .
+COPY ./srcs/phpmyadmin phpmyadmin
+COPY ./srcs/start.sh .
 RUN sh setup.sh
 EXPOSE 443
 CMD ["sh", "start.sh"]

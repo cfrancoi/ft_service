@@ -1,1 +1,0 @@
-SELECT "usage_percent" FROM "autogen"."docker_container_mem" WHERE ("io.kubernetes.docker.type" = 'container' AND "io.kubernetes.container.name" = 'my-influxdb') AND $timeFilter

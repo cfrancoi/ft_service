@@ -7,11 +7,7 @@ apk add openrc;\
 apk add wget;\
 mkdir './data'
 
-COPY start.sh .
-COPY install_db.sh .
-COPY mariadb.cnf .
-COPY wp.sql .
-COPY gra.sql .
+COPY ./srcs/* ./
 RUN chmod +x install_db.sh
 EXPOSE 3306
 CMD ["sh", "start.sh"]

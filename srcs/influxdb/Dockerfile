@@ -1,6 +1,6 @@
 FROM alpine:3.11.7
-COPY config.conf .
-COPY influx.conf .
+COPY ./srcs/config.conf .
+COPY ./srcs/influx.conf .
 RUN apk update ;\
 apk add openrc;\
 apk add wget;\
@@ -10,6 +10,6 @@ mkdir './data' ;\
 mkdir './certs'
 
 
-COPY start.sh .
+COPY ./srcs/start.sh .
 EXPOSE 8086
 CMD ["sh", "start.sh"]

@@ -7,9 +7,9 @@ mkdir -p /usr/share/nginx/html ;\
 echo "hello world" > /usr/share/nginx/html/index.html ;\
 mkdir -p /run/nginx ;
 
-COPY default.conf /etc/nginx/conf.d/
+COPY ./srcs/default.conf /etc/nginx/conf.d/
 
-COPY setup.sh .
+COPY ./srcs/setup.sh .
 RUN sh setup.sh
 EXPOSE 80
 EXPOSE 443
