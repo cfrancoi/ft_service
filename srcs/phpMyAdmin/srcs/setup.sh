@@ -7,3 +7,4 @@ mkdir /usr/share/nginx/html/phpmyadmin/tmp
 mv config.inc.php /usr/share/nginx/html/phpmyadmin
 chown -R nginx:nginx /usr/share/nginx/html/phpmyadmin
 chmod 777 /usr/share/nginx/html/phpmyadmin
+chmod 777 /usr/share/nginx/html/phpmyadmin/tmp

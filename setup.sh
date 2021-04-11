@@ -40,7 +40,7 @@ kubectl apply -f srcs/influxdb/influxdb.yaml
 
 #--Wordpress--
 sed "s/_IP_/$MINIKUBE_IP/g" srcs/wordpress/srcs/site-sample.conf > srcs/wordpress/srcs/default.conf
-sed "s/_IP_/$MINIKUBE_IP/g" srcs/wordpress/srcs/install_db > srcs/wordpress/srcs/install_db.sh
+sed "s/_IP_/$MINIKUBE_IP/g" srcs/wordpress/srcs/install_wp > srcs/wordpress/srcs/install_wp.sh
 docker build srcs/wordpress/ -t ft_wordpress
 kubectl apply -f srcs/wordpress/wordpress.yaml
 
