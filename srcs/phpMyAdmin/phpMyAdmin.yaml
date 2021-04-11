@@ -18,7 +18,7 @@ spec:
         imagePullPolicy: Never
         image: ft_phpmyadmin
         ports:
-        - containerPort: 443
+        - containerPort: 5000
           name: https
 ---
 apiVersion: v1
@@ -35,6 +35,6 @@ spec:
   ports:
     - protocol: TCP
       port: 5000
-      targetPort: 443
+      targetPort: 5000
       nodePort: 5000
       name: https

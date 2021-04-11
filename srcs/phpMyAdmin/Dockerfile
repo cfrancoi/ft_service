@@ -18,5 +18,5 @@ COPY ./srcs/config.inc.php .
 COPY ./srcs/phpmyadmin phpmyadmin
 COPY ./srcs/start.sh .
 RUN sh setup.sh
-EXPOSE 443
+EXPOSE 5000
 CMD ["sh", "start.sh"]
