@@ -18,5 +18,5 @@ COPY ./srcs/setup.sh .
 COPY ./srcs/install_wp.sh .
 COPY ./srcs/start.sh .
 RUN sh setup.sh
-EXPOSE 443
+EXPOSE 5050
 CMD ["sh", "start.sh"]
